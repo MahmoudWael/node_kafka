@@ -23,8 +23,9 @@ const run = async () => {
             console.log(batch)
         },
         eachMessage: async ({topic, partition, message}) => {
-            message.value= JSON.parse(message.value);
-            addToIndex(message, client);
+            // message.value= JSON.parse(message.value);
+            // addToIndex(message, client);
+            console.log(message.value);
         },
     });
 };

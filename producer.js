@@ -1,36 +1,29 @@
 require("dotenv").config();
 const kafka = require("./modules/kafka");
-const axios = require('axios');
+const WebSocket = require('ws');
 
 const producer = kafka.producer();
 const topic = 'topic-test';
+const producerUrl = "wss://ws-feed.pro.coinbase.com";
 
-const produce = async () => {
-    try {
-        const result = await axios.get(`https://newsapi.org/v2/top-headlines?country=eg&category=sports&apiKey=${process.env.API_KEY}`);
-        let messages = [];
-        result.data["articles"].forEach(item => {
-            messages.push({key: item.title, value: JSON.stringify(item)});
-        });
-        await sendMessage(messages);
-    } catch (e) {
-        console.log(e.message);
-    }
-};
+const ws = new WebSocket(producerUrl);
 
-const sendMessage = async (payloads) => {
-    await producer
+ws.on('open', function open() {
+    console.log("connection established");
+    ws.send(`{
+        "type": "subscribe",
+        "channels": [{"name": "heartbeat", "product_ids": ["ETH-EUR"]}]
+    }`);
+});
+
+ws.on('message', function incoming(data) {
+    sendMessage(data).then(console.log).catch(console.error);
+});
+
+const sendMessage = (message) => {
+    return producer
         .send({
             topic: topic,
-            messages: payloads
-        }).then(console.log).catch(console.error);
+            messages: [{key: Math.random() * 10, value: JSON.stringify(message)}]
+        });
 };
-
-const run = async () => {
-    await producer.connect();
-    await produce();
-};
-
-setInterval(() => {
-    run().catch(e => console.error(`[example/producer] ${e.message}`, e));
-}, 30000);
