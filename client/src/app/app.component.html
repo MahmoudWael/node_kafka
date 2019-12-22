@@ -1,0 +1,46 @@
+<div style="padding: 3rem">
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <label for="inputData"></label><input matInput placeholder="Search" type="text" name="inputData" id="inputData"
+                                              (input)="search($event)"/>
+      </mat-form-field>
+    </form>
+</div>
+
+<table>
+  <tr *ngFor="let row of datasource" >
+  <td> {{row._source.sequence }}</td>
+  </tr>
+</table>
+
+<div style="padding: 3rem">
+  <table mat-table  [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef > Product type </th>
+      <td mat-cell *matCellDef="let element"> {{element._source.type}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="trade_id">
+      <th mat-header-cell *matHeaderCellDef> Last trade id</th>
+      <td mat-cell *matCellDef="let element"> {{element._source.last_trade_id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="product_id">
+      <th mat-header-cell *matHeaderCellDef> Product id</th>
+      <td mat-cell *matCellDef="let element"> {{element._source.product_id }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sequence">
+      <th mat-header-cell *matHeaderCellDef> Sequence </th>
+      <td mat-cell *matCellDef="let element"> {{element._source.sequence}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef> Time </th>
+      <td mat-cell *matCellDef="let element"> {{element._source.time | date: 'medium'}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
