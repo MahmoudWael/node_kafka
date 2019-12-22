@@ -8,7 +8,7 @@ const client = new elasticsearch.Client({
 
 client.ping({
     requestTimeout: 30000,
-}, function (error) {
+}, error => {
     if (error) {
         console.error('elasticsearch cluster is down!');
     } else {

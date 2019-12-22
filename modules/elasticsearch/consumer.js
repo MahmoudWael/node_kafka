@@ -7,8 +7,8 @@ const topic = 'topic-test';
 
 const addToIndex = (message, client) => {
    client().index({
-     index: 'kafka-index',
-     body: message.value
+     index: 'kafka-heartbeat',
+     body: message
  }, function(err, resp, status) {
      console.log(resp);
  });
@@ -23,9 +23,8 @@ const run = async () => {
             console.log(batch)
         },
         eachMessage: async ({topic, partition, message}) => {
-            // message.value= JSON.parse(message.value);
-            // addToIndex(message, client);
-            console.log(message.value);
+            let data = JSON.parse(message.value.toString());
+            addToIndex(data, client);
         },
     });
 };
