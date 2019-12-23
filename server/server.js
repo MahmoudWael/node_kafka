@@ -5,6 +5,7 @@ const api = require('../api/search');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
+const swaggerOptions = require('../modules/swagger/index');
 
 const start = (options) => {
     return new Promise((resolve, reject) => {
@@ -13,6 +14,9 @@ const start = (options) => {
         }
 
         const app = express();
+
+        const expressSwagger = require('express-swagger-generator')(app);
+        expressSwagger(swaggerOptions);
 
         app.use(morgan('dev'));
         app.use(helmet());
