@@ -17,7 +17,6 @@ ws.on('open', function open() {
 });
 
 ws.on('message', function incoming(data) {
-    // console.log(data);
     sendMessage(data).then(console.log).catch(console.error);
 });
 

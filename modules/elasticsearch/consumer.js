@@ -6,12 +6,12 @@ const topic = 'topic-test';
 
 
 const addToIndex = (message, client) => {
-   client().index({
-     index: 'kafka-heartbeat',
-     body: message
- }, function(err, resp, status) {
-     console.log(resp);
- });
+    client().index({
+        index: 'kafka-heartbeat',
+        body: message
+    }, function (err, resp, status) {
+        console.log(resp);
+    });
 };
 
 const run = async () => {

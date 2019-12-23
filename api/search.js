@@ -29,7 +29,7 @@ module.exports = (app, options) => {
             );
             res.json(response.hits.hits);
         } catch (err) {
-            res.json("Invalid Query!");
+            res.json("Something went wrong!");
         }
     });
 };

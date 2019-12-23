@@ -34,7 +34,24 @@ services:
     volumes:
       - data01:/usr/share/elasticsearch/data
     ports:
-      - 9200:9200
+      - "9200:9200"
+  nodejs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - es01
+    image: nodejs
+    container_name: nodejs
+    env_file: .env
+    ports:
+      - "3000:3000"
+    links:
+      - es01
+    volumes:
+      - .:/home/node/app
+      - node_modules:/home/node/app/node_modules
 volumes:
   data01:
     driver: local
+  node_modules:
