@@ -11,4 +11,4 @@ describe('GET /heartbeat', () => {
                 if (err) throw err;
             });
     });
-});gi
+});
