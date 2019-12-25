@@ -13,7 +13,6 @@
 
 - [Installation](#installation)
 - [Features](#features)
-- [FAQ](#faq)
 ---
 
 
@@ -60,17 +59,6 @@ http://localhost:3000/api-docs
 
 [![](https://media.giphy.com/media/YPu0Hnyui2vAyfWOeo/giphy.gif)]()
 
-
-## FAQ
-
-- **Why kafka?**
-    - Kafka is often used in real-time streaming data architectures to provide real-time analytics. Since Kafka is a fast, scalable, durable, and fault-tolerant publish-subscribe messaging system, Kafka is used in use cases where JMS, RabbitMQ, and AMQP may not even be considered due to volume and responsiveness.
-
-- **Why Elasticsearch?**
-    - Why Elasticsearch?
-      Elasticsearch is a search and analytics engine that enables fast and scalable searches in a distributed environment.
-
----
 
 ## License
 
